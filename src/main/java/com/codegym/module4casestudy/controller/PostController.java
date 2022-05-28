@@ -3,6 +3,7 @@ package com.codegym.module4casestudy.controller;
 import com.codegym.module4casestudy.model.dto.*;
 import com.codegym.module4casestudy.model.entity.*;
 import com.codegym.module4casestudy.service.commentPostUser.ICommentPostUserService;
+import com.codegym.module4casestudy.service.group.IGroupService;
 import com.codegym.module4casestudy.service.imagePostUser.IImagePostUserService;
 import com.codegym.module4casestudy.service.likePostUser.ILikePostUserService;
 import com.codegym.module4casestudy.service.likecomment.ILikeCommentService;
@@ -59,6 +60,8 @@ public class PostController {
 
     @Autowired
     private IReplyService replyService;
+    @Autowired
+    private IGroupService groupService;
 
     @GetMapping("/{userId}")
     public ResponseEntity<List<PostUserFrontEnd>> showAllPostUser(@PathVariable Long userId) {

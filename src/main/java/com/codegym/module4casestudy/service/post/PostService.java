@@ -55,11 +55,7 @@ public class PostService implements IPostService{
 
     @Override
     public String getDiffDays(Date time1, Date time2) {
-
         long timeDifferenceMilliseconds = (time2.getTime() - time1.getTime());
-
-
-
         long diffSeconds = timeDifferenceMilliseconds / 1000;
         long diffMinutes = timeDifferenceMilliseconds / (60 * 1000);
         long diffHours = timeDifferenceMilliseconds / (60 * 60 * 1000);

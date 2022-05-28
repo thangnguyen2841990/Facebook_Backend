@@ -4,6 +4,7 @@ import com.codegym.module4casestudy.model.dto.ChatDTO;
 import com.codegym.module4casestudy.model.dto.MessagerDTO;
 import com.codegym.module4casestudy.model.dto.MessagerForm;
 import com.codegym.module4casestudy.model.entity.Chat;
+import com.codegym.module4casestudy.model.entity.Chat1;
 import com.codegym.module4casestudy.model.entity.Messager;
 import com.codegym.module4casestudy.model.entity.UserInfo;
 import com.codegym.module4casestudy.service.chat.IChatService;
@@ -39,22 +40,6 @@ public class MessagerController {
 
     @Autowired
     private IChatService chatService;
-
-
-    @GetMapping("/chat/{userId}")
-    public ResponseEntity<List<ChatDTO>> findALlChatByUserId(@PathVariable Long userId) {
-        Optional<UserInfo> user = this.userInfoService.findByUserId(userId);
-        List<Chat> chats = this.chatService.getAllChatByUser(user.get().getId());
-        List<ChatDTO> chatDtoList = new ArrayList();
-        for (int i = 0; i < chats.size(); i++) {
-            chatDtoList.add(new ChatDTO(chats.get(i).getId(),
-                                        chats.get(i).getUser1(),
-                                        chats.get(i).getUser2(),
-                                        chats.get(i).getLastContent(),
-                                        this.postService.getDiffDays(chats.get(i).getDateCreated(), new Date())));
-        }
-        return new ResponseEntity<>(chatDtoList, HttpStatus.OK);
-    }
     @PostMapping("/{formId}/{toId}")
         public ResponseEntity<Messager> createMessage(@PathVariable Long formId, @PathVariable Long toId, @RequestBody MessagerForm messagerForm) {
         UserInfo formUser = this.userInfoService.findByUserId(formId).get();
